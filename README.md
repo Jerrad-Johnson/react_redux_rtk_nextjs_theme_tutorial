@@ -6,7 +6,7 @@ This script's goal is to create a site-wide dark- and light-theme, without havin
 
 And by using a global store, you can set your theme selector anywhere you desire without having to prop drill or clutter your project with another useContext.
 
-The theme will persist when the user clicks a `<Link>`, but not if they directly navigate to a URL or if they otherwise leave the website. If you want it to persist, store the variable in localStorage.
+The theme will persist when the user clicks a `<Link>`, but not if they directly navigate to a URL or if they otherwise leave the website. If you want it to persist, store the variable in localStorage and call it from there.
 
 ## Notes
 
