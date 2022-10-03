@@ -173,7 +173,7 @@ body{
 }
 ```
 
-## Add theme-selector buttons to any page or component you desire, e.g. 
+## Add theme-selectors anywhere you desire, e.g. 
 
 ```
 // index.tsx
