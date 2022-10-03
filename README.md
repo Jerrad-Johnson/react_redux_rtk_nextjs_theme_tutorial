@@ -6,8 +6,7 @@ This script's goal is to create a site-wide dark- and light-theme, without havin
 
 And by using a global store, you can set your theme selector anywhere you desire without having to prop drill or clutter your project with another useContext.
 
-The theme will persist when the user clicks a `<Link>`, but not if they directly navigate to a URL or if they otherwise leave the website. If you want it to persist, store the variable in localStorage and call it from there.
-
+localStorage was used so that the user's theme will persist both when they directly navigate to a URL, and when they refresh the page. 
 ## Notes
 
 Your `globals.css` should operate as your default style; this is where you will set flexbox styles, height, margin, etc.
@@ -57,7 +56,7 @@ export interface ThemeOptions {
     light: "light-theme";
 }
 
-const themeOptions: ThemeOptions = {
+export const themeOptions: ThemeOptions = {
     dark: "dark-theme",
     light: "light-theme",
 }
@@ -76,10 +75,12 @@ export const themeSlice = createSlice({
     reducers: {
         lightTheme: (state: Draft<ThemeState>) => {
             state.value = themeOptions.light;
+            localStorage.setItem("themeStyle", themeOptions.light);
         },
 
         darkTheme: (state: Draft<ThemeState>) => {
             state.value = themeOptions.dark;
+            localStorage.setItem("themeStyle", themeOptions.dark);
         },
     },
 });
@@ -93,9 +94,10 @@ export default themeSlice.reducer;
 ```
 // GetTheme.tsx
 
-import {Provider, useSelector} from "react-redux";
+import {Provider, useDispatch, useSelector} from "react-redux";
 import {RootState, store} from "../app/store";
-import {ThemeOptions} from "../features/theme/themeSlice";
+import {useEffect} from "react";
+import {darkTheme, lightTheme, themeOptions} from "../features/theme/themeSlice";
 
 function GetTheme(){
     return (
@@ -106,9 +108,20 @@ function GetTheme(){
 }
 
 function ThemeLink(){
-    const themeType: ThemeOptions = useSelector((state: RootState) => state.theme.value);
+    let themeType: string = useSelector((state: RootState) => state.theme.value);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        let storedTheme: string | undefined | null = localStorage.getItem("themeStyle");
+        if ((storedTheme !== null) && (storedTheme !== undefined)) themeType = storedTheme;
+        if (storedTheme === themeOptions.light) dispatch(lightTheme());
+        if (storedTheme === themeOptions.dark) dispatch(darkTheme());
+    }, []);
+
     return (
-        <link rel={"stylesheet"} href={`/${themeType}.css`}/>
+        <>
+            <link rel={"stylesheet"} href={`/${themeType}.css`}/>
+        </>
     );
 }
 
