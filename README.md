@@ -1,4 +1,4 @@
-# React-based Theme Selector for Redux Toolkit (RTK) with Next.JS.
+# React-based Theme Selector using Redux Toolkit (RTK) with Next.JS.
 
 ## About
 
@@ -48,7 +48,7 @@ export type AppDispatch = typeof store.dispatch
 ## Create slice
 
 ```
-//themeSlice.ts
+// themeSlice.ts
 
 import {createSlice, Draft} from '@reduxjs/toolkit'
 
@@ -91,7 +91,7 @@ export default themeSlice.reducer;
 ## Create GetTheme component
 
 ```
-//GetTheme.tsx
+// GetTheme.tsx
 
 import {Provider, useSelector} from "react-redux";
 import {RootState, store} from "../app/store";
@@ -118,7 +118,7 @@ export default GetTheme;
 ## Change App file
 
 ``` 
-//_app.tsx 
+// _app.tsx 
 // Most important code to notice: Provider and GetTheme.
 
 import '../styles/globals.css'
