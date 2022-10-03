@@ -8,6 +8,12 @@ And by using a global store, you can set your theme selector anywhere you desire
 
 The theme will persist when the user clicks a <Link>, but not if they directly navigate to a URL or if they otherwise leave the website. If you want it to persist, store the variable in localStorage.
 
+## Notes
+
+Your `globals.css` should operate as your default style; this is where you will set flexbox styles, height, margin, etc.
+
+In your `dark-theme.css` and `light-theme.css` files, you'll set your colors, background colors, etc.
+
 ## Structure
 
 - /app/store.ts
@@ -15,15 +21,9 @@ The theme will persist when the user clicks a <Link>, but not if they directly n
 - /features/theme/themeSlice.ts
 - /pages/_app.tsx
 - /pages/index.tsx
-- /public/dark-theme.css
+- /public/dark-theme.css~
 - /public/light-theme.css
 - /styles/globals.css
-
-## Notes
-
-Your `globals.css` should operate as your default style; this is where you will set flexbox styles, height, margin, etc.
-
-In your `dark-theme.css` and `light-theme.css` files, you'll set your colors, background colors, etc.   
 
 ## Create store
 
